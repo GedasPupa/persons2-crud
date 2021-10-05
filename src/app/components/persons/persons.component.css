@@ -1,0 +1,20 @@
+label {
+  font-weight: bold;
+}
+
+input {
+  margin-left: 10px;
+}
+
+.table {
+  margin-top: 21px;
+}
+
+.btn {
+  padding: 0px 5px;
+}
+
+a {
+  color: darkblue;
+  text-decoration: none;
+}

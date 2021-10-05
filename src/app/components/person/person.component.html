@@ -1,0 +1,42 @@
+<p *ngIf="error" class="alert alert-danger">ERROR! No such id! {{error}}</p>
+<form #formInfo="ngForm" action method="GET">
+<table class='table'>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Surname</th>
+      <th>Phone</th>
+      <th>Email</th>
+      <!-- <th>Importance</th> -->
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngIf="person !== undefined; else noPerson">
+      <td><input type="text" [(ngModel)]="person.name" name="name"></td>
+      <td><input type="text" [(ngModel)]="person.surname" name="surname"></td>
+      <td><input type="number" [(ngModel)]="person.phone" name="phone"></td>
+      <td><input type="email" [(ngModel)]="person.email" name="email"></td>
+      <!-- <td><input type="number" [(ngModel)]="importance" name="importance" min="1" max="5"></td> -->
+    </tr>
+  </tbody>
+</table>
+<p *ngIf="!formInfo.touched && formInfo.submitted" class="alert alert-warning">Form is untuched! Make some changes for saving!</p>
+<p *ngIf="!formInfo.valid && formInfo.submitted && formInfo.touched" class="alert alert-warning">Form is invalid! Make some changes in red fields for saving!</p>
+<!-- <button type="submit" (click)="onSubmit($event)" class="btn btn-success">Save</button> -->
+<ng-template #noPerson>
+  <tr>
+    <td><input type="text" value='' #inName="ngModel" name="name" ngModel required><p *ngIf="inName.invalid && inName.touched" >Name not valid.</p></td>
+    <td><input type="text" value='' #inS="ngModel" name="surname" ngModel required><p *ngIf="inS.invalid && inS.touched" >Surname not valid.</p></td>
+    <td><input type="number" value='' #inP="ngModel" name="phone" ngModel required><p *ngIf="inP.invalid && inP.touched" >Phone not valid.</p></td>
+    <td><input type="email" value='' #inE="ngModel" name="email" ngModel required><p *ngIf="inE.invalid && inE.touched" >Email not valid.</p></td>
+    <!-- <td><input type="number" min="1" max="5" value='' #inI="ngModel" name="importance" ngModel required><p *ngIf="inI.invalid && inI.touched" >Importance must be 1-5.</p></td> -->
+  </tr>
+  <br>
+</ng-template>
+<div class="delete-edit-btns">
+  <a [routerLink]="['/persons']" class="btn btn-secondary">Back</a>
+  <button class="btn btn-dark" (click)="onBack()">Back to Black</button>
+  <button class="btn btn-danger" *ngIf="person !== undefined">Delete</button>
+  <button type="submit" (click)="onSubmit($event)" class="btn btn-success">Save</button>
+</div>
+</form>

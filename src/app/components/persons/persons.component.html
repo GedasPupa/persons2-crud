@@ -1,0 +1,43 @@
+<label>FILTER:</label>
+<input type="text" (input)="onFilter($event)" class="filter-input"/>
+<br>
+<table class='table' *ngIf="filterData.length > 0; else noProductsWarning">
+  <thead>
+    <tr>
+      <!-- sprendimas su 2 <i> pasitelkiant {{this.field}} kintamaji -->
+      <th>Name <i (click)="onSort('name')" class="fa fa-angle-{{this.field === 'name' ? (this.sortAsc ? 'down' : 'up') : 'down'}}"></i></th>
+      <th>Surname <i (click)="onSort('surname')" class="fa fa-angle-{{this.field === 'surname' ? (this.sortAsc ? 'down' : 'up') : 'down'}}"></i></th>
+      <th>Phone <i (click)="onSort('phone')" class="fa fa-angle-{{this.field === 'phone' ? (this.sortAsc ? 'down' : 'up') : 'down'}}"></i></th>
+      <th>Email <i (click)="onSort('email')" class="fa fa-angle-{{this.field === 'email' ? (this.sortAsc ? 'down' : 'up') : 'down'}}"></i></th>
+      <!-- <th>Importance <i (click)="onSort('importance')" class="fa fa-angle-{{this.field === 'importance' ? (this.sortAsc ? 'down' : 'up') : 'down'}}"></i></th> -->
+      <th>Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of filterData">
+      <td><a [routerLink]="['/persons', item.id]">{{item.name | toSpace: '-' | toSpace: '~' | capitalizeFirst }}</a></td>
+      <td><a [routerLink]="['/persons', item.id]">{{item.surname | toSpace: '-' | toSpace: '/' | capitalizeFirst }}</a></td> <!-- SK: kaip paduoti argumentu masyva (ar kelis argumentus) pipe'ui? -->
+      <td>{{item.phone}}</td>
+      <td>{{item.email}}</td>
+      <!-- <td>
+        [inputFromParent]="item.importance"
+
+        <app-importance
+          [inputFromParent]="getAverageRating(item.id - 1)"
+          [inputFromParent2]="item.getAverageRating()"
+
+          [idFromParent]="item.id"
+          (starClicked)="OnStarClick($event)"
+          (starClicked2)="OnstarClick2($event)"
+          (ratingClicked)="OnRatingClick($event)"
+          >
+        </app-importance>
+      </td> -->
+      <td><button class="btn btn-danger"><i class="fa fa-minus-square-o"></i></button></td>
+    </tr>
+  </tbody>
+</table>
+<ng-template #noProductsWarning>
+  <p class="alert alert-warning">Sorry, no data!</p>
+</ng-template>
+
