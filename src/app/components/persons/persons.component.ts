@@ -9,18 +9,29 @@ import { IPerson } from 'src/app/models/Person';
 })
 export class PersonsComponent {
   constructor(private _personsService: PersonsService) {
-    this.persons = this._personsService.getAllPersons();
-    this.filterData = this.persons;
+    this._personsService.getAllPersonsHttp().subscribe(
+      (res) => {
+        this.persons = res;
+        this.filterData = this.persons;
+        this.dataLoaded = true;
+      },
+      (err) => {
+        console.log(err);
+        this.dataLoaded = true;
+      }
+    );
+    // this.filterData = this.persons;
     // this.error = this.router.getCurrentNavigation()?.extras.state?.error;
   }
-  persons: IPerson[];
-  filterData: IPerson[];
+  persons: IPerson[] = [];
+  filterData: IPerson[] = this.persons;
   onePerson: any;
   sortAsc: boolean = true;
   field: string = '';
   text: string = '';
   star: number = 0;
   id: number = 0;
+  dataLoaded = false;
   // error: string | undefined;
 
   onFilter($event: any): void {

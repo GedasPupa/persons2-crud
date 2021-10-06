@@ -1,12 +1,14 @@
+import { IPerson } from 'src/app/models/Person';
 import { Injectable } from '@angular/core';
-import { IPerson } from '../models/Person';
 import { PersonClass } from '../models/PersonClass';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PersonsService {
-  constructor() { }
+  constructor(private http: HttpClient) { }
   id: number = 0;
   persons: IPerson[] = [
     new PersonClass(1, 'atoMAS-2', 'tomylinas', 3706661111, 'tomas@tomas.lt', [4.7, 1, 1, 1]),
@@ -19,8 +21,16 @@ export class PersonsService {
     return this.persons;
   }
 
+  getAllPersonsHttp(): Observable<IPerson[]> {
+    return this.http.get<IPerson[]>('http://localhost:3000/persons');
+  }
+  
   getOnePerson(id: number): IPerson {
     return this.persons.filter(p => p.id === +id)[0];
+  }
+
+  getOnePersonHttp(id: number): Observable<IPerson> {
+    return this.http.get<IPerson>(`http://localhost:3000/persons/${id}`);
   }
 
   setImportance(id: number, star: number): void {

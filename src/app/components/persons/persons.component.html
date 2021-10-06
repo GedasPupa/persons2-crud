@@ -38,6 +38,6 @@
   </tbody>
 </table>
 <ng-template #noProductsWarning>
-  <p class="alert alert-warning">Sorry, no data!</p>
+  <p *ngIf="dataLoaded" class="alert alert-warning">Sorry, no data!</p>
 </ng-template>
 

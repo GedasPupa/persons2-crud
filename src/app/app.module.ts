@@ -11,6 +11,7 @@ import { Router, RouterModule } from '@angular/router';
 import { CapitalizeFirstPipe } from './pipes/capitalize-first.pipe';
 import { ToSpacePipe } from './pipes/to-space.pipe';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { FormsModule } from '@angular/forms';
   imports: [
     BrowserModule,
     FormsModule,
+    HttpClientModule,
     RouterModule.forRoot([
       { path: '', component: PersonsComponent },
       { path: 'persons', component: PersonsComponent },

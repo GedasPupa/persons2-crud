@@ -31,8 +31,15 @@ export class PersonComponent implements OnInit {
   ngOnInit() {
     this.sub = this._Activatedroute.paramMap.subscribe((params) => {
       this.id = params.get('id');
-      this.person = this._personsService.getOnePerson(+this.id);
-      this.importance = this.getAverageRating();
+      this._personsService.getOnePersonHttp(+this.id).subscribe(
+        (res) => {
+          this.person = res;
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
+      // this.importance = this.getAverageRating();
     });
   }
 
