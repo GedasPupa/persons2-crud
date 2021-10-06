@@ -105,12 +105,15 @@ export class PersonComponent implements OnInit {
 
   onCreate(): void {
     this._personsService.createOne(this.formInfo.value).subscribe(
-      (res) => {
-        console.log(res);
-      },
-      (err) => {
-        console.log(err);
-      }
+      (res) => this._router.navigate(['/persons']),
+      (err) => console.log(err)
+    );
+  }
+
+  onUpdate(): void {
+    this._personsService.update(this.person!).subscribe(
+      (res) => this._router.navigate(['/persons']),
+      (err) => console.log(err)
     );
   }
 }

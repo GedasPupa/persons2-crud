@@ -62,8 +62,15 @@ export class PersonsService {
   deleteOne(id: number): Observable<any> {
     return this.http.delete<any>(`http://localhost:3000/persons/${id}`);
   }
-  // CREATE one
+  // POST (CREATE) one
   createOne(person: IPerson | undefined): Observable<IPerson> {
     return this.http.post<IPerson>(`http://localhost:3000/persons`, person);
+  }
+  // PUT (UPDATE) one
+  update(person: IPerson): Observable<IPerson> {
+    return this.http.put<IPerson>(
+      `http://localhost:3000/persons/${person.id}`,
+      person
+    );
   }
 }

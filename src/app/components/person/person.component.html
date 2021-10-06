@@ -34,10 +34,9 @@
   <br>
 </ng-template>
 <div class="delete-edit-btns">
-  <a [routerLink]="['/persons']" class="btn btn-secondary">Back</a>
   <button class="btn btn-dark" (click)="onBack()">Back to Black</button>
-  <button type="button" (click)="onDelete(person.id)" class="btn btn-danger" *ngIf="person !== undefined">Delete</button>
-  <!-- <button type="submit" (click)="onSubmit($event)" class="btn btn-success">Save</button> -->
-  <button type="submit" (click)="onCreate()" class="btn btn-success">Save</button>
+  <button *ngIf="!!person" type="button" (click)="onDelete(person.id)" class="btn btn-danger" >Delete</button>
+  <button *ngIf="!!person" type="submit" (click)="onUpdate()" class="btn btn-warning">Update</button>
+  <button *ngIf="!person" type="submit" (click)="onCreate()" class="btn btn-success">Save</button>
 </div>
 </form>
