@@ -62,4 +62,8 @@ export class PersonsService {
   deleteOne(id: number): Observable<any> {
     return this.http.delete<any>(`http://localhost:3000/persons/${id}`);
   }
+  // CREATE one
+  createOne(person: IPerson | undefined): Observable<IPerson> {
+    return this.http.post<IPerson>(`http://localhost:3000/persons`, person);
+  }
 }

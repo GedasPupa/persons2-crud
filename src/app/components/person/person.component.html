@@ -25,7 +25,7 @@
 <!-- <button type="submit" (click)="onSubmit($event)" class="btn btn-success">Save</button> -->
 <ng-template #noPerson>
   <tr>
-    <td><input type="text" value='' #inName="ngModel" name="name" ngModel required><p *ngIf="inName.invalid && inName.touched" >Name not valid.</p></td>
+    <td><input type="text" value=''  #inName="ngModel" name="name" ngModel required><p *ngIf="inName.invalid && inName.touched" >Name not valid.</p></td>
     <td><input type="text" value='' #inS="ngModel" name="surname" ngModel required><p *ngIf="inS.invalid && inS.touched" >Surname not valid.</p></td>
     <td><input type="number" value='' #inP="ngModel" name="phone" ngModel required><p *ngIf="inP.invalid && inP.touched" >Phone not valid.</p></td>
     <td><input type="email" value='' #inE="ngModel" name="email" ngModel required><p *ngIf="inE.invalid && inE.touched" >Email not valid.</p></td>
@@ -37,6 +37,7 @@
   <a [routerLink]="['/persons']" class="btn btn-secondary">Back</a>
   <button class="btn btn-dark" (click)="onBack()">Back to Black</button>
   <button type="button" (click)="onDelete(person.id)" class="btn btn-danger" *ngIf="person !== undefined">Delete</button>
-  <button type="submit" (click)="onSubmit($event)" class="btn btn-success">Save</button>
+  <!-- <button type="submit" (click)="onSubmit($event)" class="btn btn-success">Save</button> -->
+  <button type="submit" (click)="onCreate()" class="btn btn-success">Save</button>
 </div>
 </form>

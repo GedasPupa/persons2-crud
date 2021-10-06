@@ -31,14 +31,18 @@ export class PersonComponent implements OnInit {
   ngOnInit() {
     this.sub = this._Activatedroute.paramMap.subscribe((params) => {
       this.id = params.get('id');
-      this._personsService.getOnePersonHttp(+this.id).subscribe(
-        (res) => {
-          this.person = res;
-        },
-        (err) => {
-          console.log(err);
-        }
-      );
+
+      // subscribe only if ID is not null:
+      if (this.id !== null) {
+        this._personsService.getOnePersonHttp(+this.id).subscribe(
+          (res) => {
+            this.person = res;
+          },
+          (err) => {
+            console.log(err);
+          }
+        );
+      }
       // this.importance = this.getAverageRating();
     });
   }
@@ -97,5 +101,16 @@ export class PersonComponent implements OnInit {
     );
     // alert(`Person with id ${id} deleted!`);
     this._router.navigate(['/persons']);
+  }
+
+  onCreate(): void {
+    this._personsService.createOne(this.formInfo.value).subscribe(
+      (res) => {
+        console.log(res);
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
   }
 }

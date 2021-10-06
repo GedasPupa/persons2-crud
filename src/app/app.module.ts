@@ -32,6 +32,7 @@ import { HttpClientModule } from '@angular/common/http';
       { path: '', component: PersonsComponent },
       { path: 'persons', component: PersonsComponent },
       { path: 'persons/:id', component: PersonComponent },
+      { path: 'person', component: PersonComponent },
       { path: 'about', component: AboutComponent },
       { path: '**', redirectTo: 'persons', pathMatch: 'full' },
     ]),

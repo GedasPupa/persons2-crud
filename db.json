@@ -27,6 +27,13 @@
       "surname": "marija-vienas",
       "phone": 44,
       "email": "geras@mail.com"
+    },
+    {
+      "name": "geras",
+      "surname": "zmogus",
+      "phone": 123123,
+      "email": "emailas",
+      "id": 20
     }
   ]
 }
