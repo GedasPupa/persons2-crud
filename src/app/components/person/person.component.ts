@@ -89,4 +89,13 @@ export class PersonComponent implements OnInit {
       this._router.navigate(['/persons']);
     }
   }
+
+  onDelete(id: number): void {
+    this._personsService.deleteOne(id).subscribe(
+      (res) => alert(`Person with id ${id} deleted!`),
+      (err) => console.log(err)
+    );
+    // alert(`Person with id ${id} deleted!`);
+    this._router.navigate(['/persons']);
+  }
 }

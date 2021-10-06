@@ -1,5 +1,5 @@
 import { PersonsService } from './../../services/persons.service';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { IPerson } from 'src/app/models/Person';
 
 @Component({
@@ -7,8 +7,10 @@ import { IPerson } from 'src/app/models/Person';
   templateUrl: './persons.component.html',
   styleUrls: ['./persons.component.css'],
 })
-export class PersonsComponent {
-  constructor(private _personsService: PersonsService) {
+export class PersonsComponent implements OnInit {
+  constructor(private _personsService: PersonsService) {}
+
+  ngOnInit(): void {
     this._personsService.getAllPersonsHttp().subscribe(
       (res) => {
         this.persons = res;
@@ -20,8 +22,6 @@ export class PersonsComponent {
         this.dataLoaded = true;
       }
     );
-    // this.filterData = this.persons;
-    // this.error = this.router.getCurrentNavigation()?.extras.state?.error;
   }
   persons: IPerson[] = [];
   filterData: IPerson[] = this.persons;
@@ -83,6 +83,18 @@ export class PersonsComponent {
     return (
       this.filterData[id].importance.reduce((a, b) => a + b) /
       this.filterData[id].importance.length
+    );
+  }
+
+  onDelete(id: number): void {
+    this._personsService.deleteOne(id).subscribe(
+      (res) => {
+        this.persons = this.persons.filter((p) => p.id !== id);
+        this.filterData = this.persons;
+      },
+      (err) => {
+        console.log(err);
+      }
     );
   }
 }

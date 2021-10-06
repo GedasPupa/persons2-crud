@@ -36,7 +36,7 @@
 <div class="delete-edit-btns">
   <a [routerLink]="['/persons']" class="btn btn-secondary">Back</a>
   <button class="btn btn-dark" (click)="onBack()">Back to Black</button>
-  <button class="btn btn-danger" *ngIf="person !== undefined">Delete</button>
+  <button type="button" (click)="onDelete(person.id)" class="btn btn-danger" *ngIf="person !== undefined">Delete</button>
   <button type="submit" (click)="onSubmit($event)" class="btn btn-success">Save</button>
 </div>
 </form>
